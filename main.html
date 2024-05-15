@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Innovation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.1em;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .section {
+            background-color: white;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            margin-top: 0;
+            font-size: 2em;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        input[type="text"], input[type="password"], textarea, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1.1em;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .radio-group {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        .description {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#" onclick="showMainPage()">Home</a>
+        <a href="#" onclick="showUserLoginPage()">User Login</a>
+        <a href="#" onclick="showAdminLoginPage()">Admin Login</a>
+    </div>
+
+    <!-- Main Page -->
+    <div class="container" id="mainPage">
+        <header>
+            Political Innovation
+        </header>
+        <div class="section">
+            <h2>Welcome to Political Innovation</h2>
+            <p id="platformDescription" class="description">
+                Our platform enables you to turn your voter data into personalized calls to action written by a leading large language model.
+            </p>
+            <button onclick="showApplicationPage()">Apply Now</button>
+        </div>
+    </div>
+
+    <!-- Application Page -->
+    <div class="container hidden" id="applicationPage">
+        <header>
+            Apply for Political Innovation AI
+        </header>
+        <div class="section">
+            <form id="applyForm">
+                <label for="username">Choose Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Choose Password:</label>
+                <input type="password" id="password" name="password" required>
+                <p>Is your organization a non profit or for profit?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="org_type" value="nonprofit" required> Non Profit</label>
+                    <label><input type="radio" name="org_type" value="forprofit" required> For Profit</label>
+                </div>
+                <label for="description">Write a short description of the objective of your messaging (donation, share, other CTA):</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Waiting for Approval Page -->
+    <div class="container hidden" id="waitingPage">
+        <header>
+            Waiting for Approval
+        </header>
+        <div class="section">
+            <p>Your application is under review. We will notify you once it is approved.</p>
+        </div>
+    </div>
+
+    <!-- User Login Page -->
+    <div class="container hidden" id="userLoginPage">
+        <header>
+            User Login
+        </header>
+        <div class="section">
+            <form id="userLoginForm">
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" name="loginUsername" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="loginPassword" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Dashboard Page -->
+    <div class="container hidden" id="userDashboard">
+        <header>
+            User Dashboard
+        </header>
+        <div class="section">
+            <h2>Upload Your Data</h2>
+            <form id="dataUploadForm">
+                <label for="dataFile">Upload Phone Numbers (CSV):</label>
+                <input type="file" id="dataFile" name="dataFile" accept=".csv" required>
+                <label for="message">Choose a Message to Send:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Page -->
+    <div class="container hidden" id="adminLoginPage">
+        <header>
+            Admin Login
+        </header>
+        <div class="section">
+            <form id="adminLoginForm">
+                <label for="adminUsername">Username:</label>
+                <input type="text" id="adminUsername" name="adminUsername" required>
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" name="adminPassword" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Page -->
+    <div class="container hidden" id="adminDashboard">
+        <header>
+            Admin Dashboard
+        </header>
+        <div class="section">
+            <h2>Pending Applications</h2>
+            <div id="applicationsList">
+                <!-- Applications will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulated database
+        const users = [];
+        let currentUser = null;
+
+        // Function to show the main page
+        function showMainPage() {
+            hideAllPages();
+            document.getElementById('mainPage').classList.remove('hidden');
+        }
+
+        // Function to show the application page
+        function showApplicationPage() {
+            hideAllPages();
+            document.getElementById('applicationPage').classList.remove('hidden');
+        }
+
+        // Function to show the waiting for approval page
+        function showWaitingPage() {
+            hideAllPages();
+            document.getElementById('waitingPage').classList.remove('hidden');
+        }
+
+        // Function to show the user login page
+        function showUserLoginPage() {
+            hideAllPages();
+            document.getElementById('userLoginPage').classList.remove('hidden');
+        }
+
+        // Function to show the user dashboard
+        function showUserDashboard() {
+            hideAllPages();
+            document.getElementById('userDashboard').classList.remove('hidden');
+        }
+
+        // Function to show the admin login page
+        function showAdminLoginPage() {
+            hideAllPages();
+            document.getElementById('adminLoginPage').classList.remove('hidden');
+        }
+
+        // Function to show the admin dashboard
+        function showAdminDashboard() {
+            hideAllPages();
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            displayApplications();
+        }
+
+        // Function to hide all pages
+        function hideAllPages() {
+            document.getElementById('mainPage').classList.add('hidden');
+            document.getElementById('applicationPage').classList.add('hidden');
+            document.getElementById('waitingPage').classList.add('hidden');
+            document.getElementById('userLoginPage').classList.add('hidden');
+            document.getElementById('userDashboard').classList.add('hidden');
+            document.getElementById('adminLoginPage').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+
+        // Handle application form submission
+        document.getElementById('applyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const orgType = document.querySelector('input[name="org_type"]:checked').value;
+            const description = document.getElementById('description').value;
+
+            users.push({ username, password, orgType, description, approved: false });
+            currentUser = username;
+            showWaitingPage();
+        });
+
+        // Handle user login form submission
+        document.getElementById('userLoginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const loginUsername = document.getElementById('loginUsername').value;
+            const loginPassword = document.getElementById('loginPassword').value;
+
+            const user = users.find(user => user.username === loginUsername && user.password === loginPassword && user.approved);
+
+            if (user) {
+                currentUser = user.username;
+                showUserDashboard();
+            } else {
+                alert('Invalid login credentials or your application is not approved yet.');
+            }
+        });
+
+        // Handle data upload form submission
+        document.getElementById('dataUploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const dataFile = document.getElementById('dataFile').files[0];
+            const message = document.getElementById('message').value;
+
+            if (dataFile && message) {
+                alert('Data uploaded and message set successfully.');
+                // Here you would typically process and send the data to your backend
+            } else {
+                alert('Please upload a data file and choose a message.');
+            }
+        });
+
+        // Handle admin login form submission
+        document.getElementById('adminLoginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const adminUsername = document.getElementById('adminUsername').value;
+            const adminPassword = document.getElementById('adminPassword').value;
+
+            if (adminUsername === 'admin' && adminPassword === 'Nandin2920') {
+                showAdminDashboard();
+            } else {
+                alert('Invalid login credentials');
+            }
+        });
+
+        // Function to display pending applications
+        function displayApplications() {
+            const applicationsList = document.getElementById('applicationsList');
+            applicationsList.innerHTML = '';
+
+            users.forEach((user, index) => {
+                if (!user.approved) {
+                    const applicationDiv = document.createElement('div');
+                    applicationDiv.classList.add('application');
+                    applicationDiv.innerHTML = `
+                        <p>Username: ${user.username}</p>
+                        <p>Organization Type: ${user.orgType}</p>
+                        <p>Description: ${user.description}</p>
+                        <button onclick="approveUser(${index})">Approve</button>
+                        <button onclick="rejectUser(${index})">Reject</button>
+                    `;
+                    applicationsList.appendChild(applicationDiv);
+                }
+            });
+        }
+
+        // Function to approve a user
+        function approveUser(index) {
+            users[index].approved = true;
+            displayApplications();
+            // Redirect approved user to the main page for login
+            if (users[index].username === currentUser) {
+                showMainPage();
+                alert('Your application has been approved. Please log in again to access your dashboard.');
+            }
+        }
+
+        // Function to reject a user
+        function rejectUser(index) {
+            users.splice(index, 1);
+            displayApplications();
+        }
+
+        // Initialize by showing the main page
+        showMainPage();
+    </script>
+
+</body>
+</html>
